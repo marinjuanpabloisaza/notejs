@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+
+    </title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="css/index.css">
+    <script src="https://kit.fontawesome.com/7762f666ee.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/boxicons@2.0.9/dist/boxicons.js"></script>
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <script src="js/main.js" async></script>
+    <script src="js/swipers.js" async></script>
+
+</head>
+
+<body>
+    <!-- menu con la barra de busqueda y ingresar y registrarse -->
+
+    <div class="navbar">
+        <img src="/img/logo.png" id="logofrom">
+        <h1 id="slogan">Con un trago te vas a otro planeta </h1>
+
+        <input class="barra" type="text" placeholder="buscar..">
+
+        <button id="inicioSesion">Ingresar</button>
+        <button id="registrarse">registrarse</button>
+    </div>
+
+
+    <!-- caja modal que contiene el ingresar -->
+    <div class="cajaModal" id=modal>
+        <div class="ventanaModal">
+
+            <div class="modalBody">
+                <h1 id="textoinicio">ingresar</h1>
+                <form action="/inicio" method="post" class=" fromIngresar ">
+                    <input type="text" name="username " id="fname " name="usuario" autocomplete="off " placeholder="Usuario " required><br>
+                    <input type="password" name="password " id="lname " name="password " placeholder="Contraseña " required><br>
+                    <input type="submit" id="ingresar" name="ingresar" value="Ingresar">
+                </form>
+                <p id="Recuperar">¿Has olvidado la contraseña? <a href=" "> Recuperar</a> </p>
+
+                </p>
+                <div class="fondoModal">
+                    <img src="/img/logo.png" alt=" " id="logo">
+
+                </div>
+                <button onclick="openModal() ">
+                    salir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- caja modal que contiene el registrarse -->
+    <div class="cajaModal " id=modalR>
+        <div class="ventanaModal">
+
+            <div class="modalBody">
+
+                <form action="/add" class="formRegister" method="post">
+
+                    <input type="text" name="nombre" placeholder="Nombre" id="nombreRegistro" autocomplete="off" required>
+                    <input type="text" name="apellido" placeholder="Apellido " id="ApellidoRegistro" autocomplete="off" required>
+                    <br>
+                    <input type="password" name="password" placeholder="Contraseña " id="passwordRegistro" autocomplete="off" required>
+                    <input type="email" name="correo" placeholder="Correo " id="CorreoRegistro" autocomplete="off" required>
+                    <br>
+                    <input type="text" name="cedula" placeholder="cédula " id="CedulaRegistro" autocomplete="off" required>
+                    <input type="text" name="direcion" placeholder="dirección " id="direccionRegistro" autocomplete="off" required>
+                    <br>
+                    <input type="date" name="fecha" id="FechaNacimientoRegistro " autocomplete="off" required>
+                    <input type="text" name="celular" placeholder="Celular" id="celularregistro" autocomplete="off" required>
+                    <br>
+                    <input type="text" name="telefono" placeholder="Teléfono fijo" id="TeléfonofijoRegistro" autocomplete="off">
+                    <input type="text" name="municipio" placeholder="Municipio" id="MunicipioRegistro" autocomplete="off" required>
+                    <br>
+                    <input type="submit" id="enviarRegist" value=" Registrarse" onclick='Crear()'>
+                </form>
+                <!---
+                <h4>Genero</h4>
+                <label for="generoM ">Femenino</label>
+                <input type="radio " value="Femenino " id="generoM " name="genero " autocomplete="off ">
+                <br>
+                <label for="generoF ">Masculino</label>
+                <input type="radio " value="Masculino " id="generoF " name="genero " autocomplete="off ">
+                <Br>
+                -->
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- menu de elementos de cateorias produc etc...)             <button class="btn-menu ">Bebidas <i class="fa fa-angle-down "></i></button>   -->
+
+    <div class="barra_menu ">
+        <UL>
+            <li class="menufila ">
+                <a href="# ">Licores <i class="fa fa-angle-down "></i></a>
+
+                <UL>
+                    <li class="menucol ">
+                        <a href="# " style="color: #36CFBB; font-size:20px ">
+                            Licores
+                        </a>
+                    </li>
+                    <li class="menucol ">
+                        <a href="# ">Ron </a>
+                    </li>
+                    <li class="menucol ">
+                        <a href="# ">Tequila </a>
+                    </li>
+                    <li class="menucol ">
+                        <a href="# ">Aguardiente </a>
+                    </li>
+                    <li class="menucol ">
+                        <a href="# ">Piña colada </a>
+                    </li>
+                </UL>
+            </li>
+            <li class="menufila ">
+                <a href="# ">Bebidas <i class="fa fa-angle-down "></i></a>
+                <UL>
+                    <li class="menucol ">
+                        <a href="# " style="color: #36CFBB; font-size:20px ">
+                            Licores
+                        </a>
+                    </li>
+                    <li class="menucol ">
+                        <a href="# ">Ron </a>
+                    </li>
+                    <li class="menucol ">
+                        <a href="# ">Tequila </a>
+                    </li>
+                    <li class="menucol ">
+                        <a href="# ">Aguardiente </a>
+                    </li>
+                    <li class="menucol ">
+                        <a href="# ">Piña colada </a>
+                    </li>
+                </UL>
+            </li>
+            <li class="menufila ">
+                <a href="# ">Snack <i class="fa fa-angle-down "></i></a>
+                <UL>
+                    <li class="menucol ">
+                        <a href="# " style="color: #36CFBB; font-size:20px ">
+                            Licores
+                        </a>
+                    </li>
+                    <li class="menucol ">
+                        <a href="# ">Ron </a>
+                    </li>
+                    <li class="menucol ">
+                        <a href="# ">Tequila </a>
+                    </li>
+                    <li class="menucol ">
+                        <a href="# ">Aguardiente </a>
+                    </li>
+                    <li class="menucol ">
+                        <a href="# ">Piña colada </a>
+                    </li>
+                </UL>
+            </li>
+            <li class="menufila ">
+                <a href="# ">Cigarreria <i class="fa fa-angle-down "></i></a>
+                <UL>
+                    <li class="menucol ">
+                        <a href="# " style="color: #36CFBB; font-size:20px ">
+                            Licores
+                        </a>
+                    </li>
+                    <li class="menucol ">
+                        <a href="# ">Ron </a>
+                    </li>
+                    <li class="menucol ">
+                        <a href="# ">Tequila </a>
+                    </li>
+                    <li class="menucol ">
+                        <a href="# ">Aguardiente </a>
+                    </li>
+                    <li class="menucol ">
+                        <a href="# ">Piña colada </a>
+                    </li>
+                </UL>
+            </li>
+        </UL>
+
+
+    </div>
+
+
+    <!--  swiper -->
+    <div class="swiper mySwiper">
+        <!--swiper principal numero uno  -->
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="/img/afiche-1.jpg" alt="">
+            </div>
+            <div class="swiper-slide">
+
+            </div>
+            <div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">Slide 4</div>
+            <div class="swiper-slide">Slide 5</div>
+            <div class="swiper-slide">Slide 6</div>
+            <div class="swiper-slide">Slide 7</div>
+            <div class="swiper-slide">Slide 8</div>
+            <div class="swiper-slide">Slide 9</div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <br> <br> <br>
+    <div class="swiper-licores">
+        <!--swiper de licores   -->
+        <div class="swiper mySwiper2">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide">
+                    <div class="imagen"><img src="/img/aguardiente.jpg" alt=""></div>
+                    <h4>
+
+                    </h4>
+                    <h3>precio del producto</h3>
+                    <div class="agregar-al-carrito">
+                        <input type="number" class="texto-numero" maxlength="2" value="1">
+                        <button type="button" class="boton-carrito"><h1>Comprar</h1><i class='bx bxs-cart-add bx-tada' ></i>
+                    </button>
+
+                    </div>
+
+                </div>
+                <div class="swiper-slide">Slide 2</div>
+                <div class="swiper-slide">Slide 3</div>
+                <div class="swiper-slide">Slide 4</div>
+                <div class="swiper-slide">Slide 5</div>
+                <div class="swiper-slide">Slide 6</div>
+                <div class="swiper-slide">Slide 7</div>
+                <div class="swiper-slide">Slide 8</div>
+                <div class="swiper-slide">Slide 9</div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <br> <br> <br>
+    <div class="swiper-bebidas">
+        <!--swiper de bebidas   -->
+        <div class="swiper mySwiper2">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">Slide 1</div>
+                <div class="swiper-slide">Slide 2</div>
+                <div class="swiper-slide">Slide 3</div>
+                <div class="swiper-slide">Slide 4</div>
+                <div class="swiper-slide">Slide 5</div>
+                <div class="swiper-slide">Slide 6</div>
+                <div class="swiper-slide">Slide 7</div>
+                <div class="swiper-slide">Slide 8</div>
+                <div class="swiper-slide">Slide 9</div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <br> <br> <br>
+    <div class="swiper-snacks">
+        <!--swiper de snack  -->
+        <div class="swiper mySwiper2">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">Slide 1</div>
+                <div class="swiper-slide">Slide 2</div>
+                <div class="swiper-slide">Slide 3</div>
+                <div class="swiper-slide">Slide 4</div>
+                <div class="swiper-slide">Slide 5</div>
+                <div class="swiper-slide">Slide 6</div>
+                <div class="swiper-slide">Slide 7</div>
+                <div class="swiper-slide">Slide 8</div>
+                <div class="swiper-slide">Slide 9</div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <br> <br> <br>
+    <div class="swiper-cigarreria">
+        <!--swiper de cigarreria   -->
+        <div class="swiper mySwiper2">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">Slide 1</div>
+                <div class="swiper-slide">Slide 2</div>
+                <div class="swiper-slide">Slide 3</div>
+                <div class="swiper-slide">Slide 4</div>
+                <div class="swiper-slide">Slide 5</div>
+                <div class="swiper-slide">Slide 6</div>
+                <div class="swiper-slide">Slide 7</div>
+                <div class="swiper-slide">Slide 8</div>
+                <div class="swiper-slide">Slide 9</div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</body>
+
+
+
+</html>
