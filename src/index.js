@@ -4,7 +4,7 @@ const path = require('path');
 const morgan = require('morgan');
 const mysql = require('mysql');
 const myConnection = require('express-myconnection');
-///hola 
+
 
 
 //setting
@@ -14,11 +14,8 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs'); ////convierte el html en ejs
 ////
 
-
-
 // middlewares
 app.use(morgan('dev'));
-
 app.use(myConnection(mysql, { /////conecion a base de datos
     host: 'localhost',
     user: 'root',
@@ -30,7 +27,7 @@ app.use(myConnection(mysql, { /////conecion a base de datos
 /////
 
 app.use(express.urlencoded({ extended: false })); /////para entender los datos de los formularios
-//routes
+app.use(express.json());
 
 app.use(require('./routes/rutas'));
 

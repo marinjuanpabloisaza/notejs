@@ -1,49 +1,30 @@
 const express = require('express');
 const router = express.Router();
-//vista del carrito de compra
-router.get('/carrito', (req, res) => {
+const ProductsController = require('../controllers/productsController');
+const LoginController = require('../controllers/sessionController');
 
-    res.render('carrito.html', {
-
-    });
-});
-
-////perfil
-router.get('/perfil', (req, res) => {
-
-    res.render('perfil.html', {
-
-    });
-});
-///// index rendirizacion 
 router.get('/', (req, res) => {
-
-    res.render('index.html', {
-
-    });
+    res.json({
+        "API": "Galaxy",
+        "version": "0.01",
+        "author": "Juan Pablo Marin"
+    })
 });
 
-///// controlador del inicio de session
 
-
-/////controladores del registro
-const customerControllers = require('../controllers/customerController');
-router.get('/', customerControllers.list, (req, res) => {});
-///datos del registro
-router.post('/add', customerControllers.save, (req, res) => {
-
+router.get('/products', (req, res, next) => {
+    ProductsController.list(req, res, next);
 });
-/*
 
-*/
-////login
+router.get('/products/:id', (req, res, next) => {
+    ProductsController.listProductsCategory(req, res, next);
+});
 
-
-
-
-
-
-
+router.post('/login/', (req, res, next) => {
+    console.log('ok',req.body);
+    console.log('ok',req.params);
+    LoginController.login(req, res, next);
+});
 
 
 

@@ -1,23 +1,28 @@
-CREATE TABLE `galaxy`.`producto` ( 
-`id_producto` INT NOT NULL AUTO_INCREMENT ,
-`nombre_prod` VARCHAR(20) NOT NULL ,
- `precio_prod` INT(11) NOT NULL ,
- `stock_min` INT(11) NOT NULL ,
-`stock_max` INT(11) NOT NULL ,
- `stock_act` INT(11) NOT NULL ,
- PRIMARY KEY  (`id_producto`)) ENGINE = MyISAM;
 
 
+CREATE TABLE categories ( 
+id INT NOT NULL AUTO_INCREMENT,
+title VARCHAR(20) NOT NULL,
+PRIMARY KEY (id));
+ 
 
-CREATE TABLE `galaxy`.`cliente` ( 
-`id_cliente` INT NOT NULL AUTO_INCREMENT ,
-`nombre_cl` VARCHAR(20) NOT NULL ,
-`apellido_cl` VARCHAR(20) NOT NULL ,
- `email_cl` VARCHAR(30) NOT NULL , ,
- `password` VARCHAR(20) NOT NULL , ,
-`fecha_cl` date NOT NULL ,
- `telefonofijo_cl` VARCHAR(20) NOT NULL  ,
- `direcion_cl` VARCHAR(20) NOT NULL  ,
- `ciudad_cl` VARCHAR(20) NOT NULL ,
- `celuda_cl` VARCHAR(20) NOT NULL ,
- PRIMARY KEY  (`id_cliente`)) ENGINE = MyISAM;
+CREATE TABLE products ( 
+id INT NOT NULL AUTO_INCREMENT ,
+title VARCHAR(150) NOT NULL ,
+price INT NOT NULL,
+stock INT NOT NULL,
+description VARCHAR(300) NOT NULL
+category_id INT,
+PRIMARY KEY  (id),
+FOREIGN KEY (category_id) REFERENCES categories(id)) 
+
+
+CREATE TABLE users ( 
+id INT NOT NULL AUTO_INCREMENT ,
+name VARCHAR(50) NOT NULL ,
+email VARCHAR(150) NOT NULL ,
+password VARCHAR(20) NOT NULL ,
+role VARCHAR(30) NOT NULL ,
+image VARCHAR(500) NOT NULL,
+PRIMARY KEY (id));
+
