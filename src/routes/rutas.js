@@ -21,8 +21,6 @@ router.get('/products/:id', (req, res, next) => {
 });
 
 router.post('/login/', (req, res, next) => {
-    console.log('ok',req.body);
-    console.log('ok',req.params);
     LoginController.login(req, res, next);
 });
 

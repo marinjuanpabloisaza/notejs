@@ -1,8 +1,7 @@
 const controller = {};
 
 controller.login = (req, res, next) => {
-    console.log('este...')
-    console.log(req.body)
+    console.log('----');
     req.getConnection((err, conn) => {
         conn.query(`SELECT name, email,role, image FROM users
         WHERE email = '${req.body.name}' AND password = '${req.body.password}';`, (err, response) => {
@@ -12,7 +11,6 @@ controller.login = (req, res, next) => {
                     description: err
                 });
             }
-            let data = {};
             if(response.length>0) {
                 res.json({
                     isLogin: true,

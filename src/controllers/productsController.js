@@ -2,14 +2,15 @@ const controller = {};
 
 controller.list = (req, res, next) => {
     req.getConnection((err, conn) => {
-        conn.query(`SELECT products.id, products.title, categories.title as category, products.price, url_image
+        conn.query(`SELECT products.id, products.title, categories.title as category, products.price, 
+        url_image, products.description
         FROM products
-        INNER JOIN categories ON products.category_id = categories.id`, (err, response) => {
+        INNER JOIN categories ON products.category_id = categories.id
+        ORDER BY RAND()`, (err, response) => {
             if (err) {
                 res.json(err);
             }
             const data = response.map(item => {
-                console.log('este:', item.url_image.split(','));
                 return {
                     id: item.id,
                     title: item.title,
@@ -17,6 +18,8 @@ controller.list = (req, res, next) => {
                     stock: item.stock,
                     stock: item.stock,
                     category: item.category,
+                    description: item.description,
+                    amount: 1,
                     images: item.url_image.split(',')
                 }
             });
@@ -29,7 +32,8 @@ controller.list = (req, res, next) => {
 
 controller.listProductsCategory = (req, res, next) => {
     req.getConnection((err, conn) => {
-        conn.query(`SELECT products.id, products.title, categories.title as category, products.price, url_image
+        conn.query(`SELECT products.id, products.title, categories.title as category, products.price, url_image,
+        products.description
         FROM products
         INNER JOIN categories ON products.category_id = categories.id
         WHERE category_id = ${req.params.id}`, (err, response) => {
@@ -37,7 +41,6 @@ controller.listProductsCategory = (req, res, next) => {
                 res.json(err);
             }
             const data = response.map(item => {
-                console.log('este:', item.url_image.split(','));
                 return {
                     id: item.id,
                     title: item.title,
@@ -45,6 +48,8 @@ controller.listProductsCategory = (req, res, next) => {
                     stock: item.stock,
                     stock: item.stock,
                     category: item.category,
+                    description: item.description,
+                    amount: 1,
                     images: item.url_image.split(',')
                 }
             });
