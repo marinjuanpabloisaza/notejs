@@ -37,8 +37,9 @@ controller.listProductsCategory = (req, res, next) => {
         FROM products
         INNER JOIN categories ON products.category_id = categories.id
         WHERE category_id = ${req.params.id}`, (err, response) => {
+            console.log('okkkkkk',err);
             if (err) {
-                res.json(err);
+               return res.json([]);
             }
             const data = response.map(item => {
                 return {

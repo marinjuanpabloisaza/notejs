@@ -25,5 +25,9 @@ router.post('/login/', (req, res, next) => {
 });
 
 
+router.post('/registro/', (req, res, next) => {
+    LoginController.registro(req, res, next);
+});
+
 
 module.exports = router;

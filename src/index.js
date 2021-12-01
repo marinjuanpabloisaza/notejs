@@ -4,19 +4,20 @@ const path = require('path');
 const morgan = require('morgan');
 const mysql = require('mysql');
 const myConnection = require('express-myconnection');
-
+const cors = require('cors');
 
 
 //setting
 app.set('port', 3000);
 app.set('views', path.join(__dirname, 'views')); ///posicion de la carpeta actual
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'ejs'); ////convierte el html en ejs
+
+app.use(cors());
+
 ////
 
 // middlewares
 app.use(morgan('dev'));
-app.use(myConnection(mysql, { /////conecion a base de datos
+app.use(myConnection(mysql, { /////conexion a base de datos
     host: 'localhost',
     user: 'root',
     password: '',

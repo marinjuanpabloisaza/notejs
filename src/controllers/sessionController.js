@@ -28,4 +28,37 @@ controller.login = (req, res, next) => {
     });
 };
 
+controller.registro = (req, res, next) => {
+    console.log('----');
+    req.getConnection((err, conn) => {
+        conn.query(`INSERT INTO users (name,email,password,telefono,direccion, role, IMAGE) 
+        values('${req.body.name}','${req.body.email}','${req.body.password}','${req.body.telefono}','${req.body.direccion}', 'USER', '');`, (err, response) => {
+            if (err) {
+                return res.json({
+                    error:true,
+                    description: err
+                });
+            }
+            if(response) {
+                res.json({
+                    error: false,
+                    infoSession: {
+                        ...req.body,
+                        id:response.insertId,
+                        role:'USER',
+                        image:'',
+                    }
+                })
+            }else{
+                res.json({
+                    error: true,
+                    infoSession: {}
+                })
+            }
+           
+
+        });
+    });
+};
+
 module.exports = controller;
