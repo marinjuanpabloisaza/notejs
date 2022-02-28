@@ -3,7 +3,7 @@ const controller = {};
 controller.login = (req, res, next) => {
     console.log('----');
     req.getConnection((err, conn) => {
-        conn.query(`SELECT name, email,role, image FROM users
+        conn.query(`SELECT name, email,role FROM users
         WHERE email = '${req.body.name}' AND password = '${req.body.password}';`, (err, response) => {
             if (err) {
                 res.json({
@@ -31,8 +31,8 @@ controller.login = (req, res, next) => {
 controller.registro = (req, res, next) => {
     console.log('----');
     req.getConnection((err, conn) => {
-        conn.query(`INSERT INTO users (name,email,password,telefono,direccion, role, IMAGE) 
-        values('${req.body.name}','${req.body.email}','${req.body.password}','${req.body.telefono}','${req.body.direccion}', 'USER', '');`, (err, response) => {
+        conn.query(`INSERT INTO users (name,email,password,telefono,address, role) 
+        values('${req.body.name}','${req.body.email}','${req.body.password}','${req.body.telefono}','${req.body.address}', 'USER');`, (err, response) => {
             if (err) {
                 return res.json({
                     error:true,
@@ -57,7 +57,7 @@ controller.registro = (req, res, next) => {
             }
            
 
-        });
+        }); 
     });
 };
 
