@@ -23,7 +23,6 @@ controller.list = (req, res, next) => {
                 }
             });
             res.json(data);
-
         });
     });
 };
@@ -53,7 +52,6 @@ controller.listProductsCategory = (req, res, next) => {
                 }
             });
             res.json(data);
-
         });
     });
 };
@@ -64,7 +62,6 @@ controller.update = (req, res, next) => {
         stock=${req.body.stock}, url_image='${req.body.url_image}',
         description='${req.body.description}', 
         category_id=${req.body.category_id} WHERE products.id =${req.body.id}`, (err, response) => {
-
             if (err) {
                 return res.json({ mensaje: 'error al actualizar', err }).status(502);
             }
@@ -72,8 +69,6 @@ controller.update = (req, res, next) => {
                 return res.json({ mensaje: 'se actualizo correctamente', err });
             }
         })
-
-
     })
 }
 
@@ -114,27 +109,51 @@ controller.delete = (req, res, next) => {
 
 
 controller.updatestock = (req, res, next) => {
-    console.log('si s ifunciona')
-    req.getConnection((err, conn) => {
-        console.log('si funciona')
-        conn.query(`UPDATE products SET stock = ${req.stock} WHERE products.id =${req.params.id} `); (err, response) => {
-            if (err) {
-                return res.json({
-                    error: true,
-                    description: err
-                });
-            }
-            if (err) {
-                return res.json({
-                    error: false,
+    const queryComprar = `INSERT INTO compra (state, id_usuario, total) values ('1', ${req.body.idUsuario}, ${req.body.total}) `;
 
-                });
-            }
-
-        }
-    })
+    if (req.body.productos.length <= 0) {
+        return res.json({ mensaje: 'no hay productos', code: 0, err: null });
+    } else {
+        req.getConnection((errDB, conn) => {
+            console.log(errDB);
+            conn.query(queryComprar, (err, response) => {
+                if (err) {
+                    return res.json({ mensaje: 'Error al realizar la compra', code: 500, err });
+                }
+                else {
+                    req.body.productos.forEach(element => {
+                        console.log(element);
+                        const query = `INSERT INTO compras_productos (id_compras, id_productos) values (${response.insertId}, ${element.id}) `;
+                        conn.query(`UPDATE products SET stock = ${element.stock - element.amount} WHERE products.id = ${element.id} `, (err, response) => { })
+                        conn.query(query, (err, responseDetail) => { })
+                    });
+                    return res.json({ mensaje: 'Se ha realizado la compra', code: 200, err });
+                }
+            })
+        })
+    }
 }
 
+
+controller.historyshopAdmin = (req, res, next) => {
+    req.getConnection((err, conn) => {
+        console.log(req.params);
+        conn.query(`SELECT users.id as user_id, compra.id, date, name, email, telefono, address, total 
+        from compra  inner join users on users.id = id_usuario`, (err, response) => {
+            
+            if (err) {
+                console.log("no comprazzzz");
+                
+                return res.json({ mensaje: 'no se  visualizo crrectamente', err }).status(502);
+            }
+            else {
+                console.log(response);
+                return res.json({ mensaje: 'se visualizo crrectamente   ', err,data:response });
+            }
+        })
+    })
+
+}
 
 
 

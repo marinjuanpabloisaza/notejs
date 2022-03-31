@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-03-2022 a las 23:38:55
+-- Tiempo de generación: 31-03-2022 a las 23:54:55
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -38,9 +38,72 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `title`) VALUES
 (1, 'licores'),
-(2, 'Bebidas'),
-(3, 'Cigarrería'),
-(4, 'snacks');
+(2, 'snacks'),
+(3, 'Bebidas'),
+(4, 'Cigarrería');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `compra`
+--
+
+CREATE TABLE `compra` (
+  `id` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `state` tinyint(1) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `total` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `compra`
+--
+
+INSERT INTO `compra` (`id`, `date`, `state`, `id_usuario`, `total`) VALUES
+(13, '2022-03-31 02:10:19', 1, 3, 0),
+(14, '2022-03-31 02:10:58', 1, 3, 0),
+(15, '2022-03-31 02:14:42', 1, 3, 0),
+(16, '2022-03-31 02:20:58', 1, 3, 80000),
+(17, '2022-03-31 02:29:39', 1, 3, 80000),
+(18, '2022-03-31 02:31:29', 1, 3, 80000),
+(19, '2022-03-31 02:32:32', 1, 3, 80000),
+(20, '2022-03-31 02:33:40', 1, 3, 80000),
+(21, '2022-03-31 02:35:03', 1, 3, 426000),
+(22, '2022-03-31 19:25:38', 1, 3, 200000);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `compras_productos`
+--
+
+CREATE TABLE `compras_productos` (
+  `id` int(11) NOT NULL,
+  `id_compras` int(11) NOT NULL,
+  `id_productos` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `compras_productos`
+--
+
+INSERT INTO `compras_productos` (`id`, `id_compras`, `id_productos`, `cantidad`) VALUES
+(1, 13, 22, 0),
+(2, 14, 22, 0),
+(3, 14, 18, 0),
+(4, 14, 20, 0),
+(5, 15, 22, 0),
+(6, 16, 20, 0),
+(7, 17, 19, 0),
+(8, 18, 19, 0),
+(9, 19, 19, 0),
+(10, 20, 19, 0),
+(11, 21, 22, 0),
+(12, 21, 21, 0),
+(13, 21, 19, 0),
+(14, 22, 21, 0);
 
 -- --------------------------------------------------------
 
@@ -63,8 +126,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `title`, `price`, `stock`, `url_image`, `description`, `category_id`) VALUES
-(3, 'Coca cola', 8000, 1000, 'https://coca-colafemsa.com/wp-content/uploads/2020/02/2-30.png', '', 2),
-(4, 'cerveza cornona', 8000, 1000, 'https://lacasserole.com.co/wp-content/uploads/2021/03/CERVEZA-CORONA-335-DE-500-X-500.jpg', '', 1);
+(18, 'Cerveza corona', 30000, 10, 'https://mercaldas.vtexassets.com/arquivos/ids/204253/Cerveza-CORONA-6unds-x355ml-c-u_116061.jpg?v=637497976269300000', 'six pack corna', 1),
+(19, 'Cerveza aguila', 8000, 87, 'https://toctocdelivery.co/wp-content/uploads/2019/04/aguila-cerveza.png', '1x cerveza aguila', 1),
+(20, 'Ron medellin', 80000, 10, 'https://olimpica.vtexassets.com/arquivos/ids/607402-800-450?v=637626496257900000&width=800&height=450&aspect=true', 'Ron medellin 750ml', 1),
+(21, 'Ron Bacardi', 100000, 4, 'https://tuttohn.com/561-large_default/ron-bacardi-carta-blanca-750-ml.jpg', 'Ron bacardi carta blanca 750 ml', 1),
+(22, 'Papa de limon', 2000, 99, 'https://tiendatellevo.com/wp-content/uploads/2020/05/Papas-Margarita-Limon.jpg', 'papas de limon margarita 105g', 2);
 
 -- --------------------------------------------------------
 
@@ -87,8 +153,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `telefono`, `role`, `address`) VALUES
-(2, 'marin', 'juanmarin@gmail.com', 'juan', '3002995463', 'USER', 'callle sur'),
-(3, 'ad', 'juanmarin@gmail.com', 'juan123', '4546', 'USER', 'gh');
+(2, 'isazaa', 'juanmarinn@gmail.com', 'juan123', '3002995464', 'ADMIN', 'callle norte'),
+(3, 'ad', 'juanmarin@gmail.com', 'juan123', '4546', 'USER', 'gh'),
+(4, 'juan', 'admin@admin.com', '123', '1234', 'ADMIN', 'caller sur'),
+(5, 'juan pablo marin ', 'marinjuanpabloisaza@gmail.com', '123', '123', 'ADMIN', 'hola'),
+(6, 'juan', 'juanmarin23@gmail.com', '1', '123', 'ADMIN', 'calle sur');
 
 --
 -- Índices para tablas volcadas
@@ -99,6 +168,21 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `telefono`, `role`, `add
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `compra`
+--
+ALTER TABLE `compra`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_id_usuario` (`id_usuario`);
+
+--
+-- Indices de la tabla `compras_productos`
+--
+ALTER TABLE `compras_productos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_id_compras` (`id_compras`),
+  ADD KEY `FK_id_producto` (`id_productos`);
 
 --
 -- Indices de la tabla `products`
@@ -124,20 +208,45 @@ ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
+-- AUTO_INCREMENT de la tabla `compra`
+--
+ALTER TABLE `compra`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT de la tabla `compras_productos`
+--
+ALTER TABLE `compras_productos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `compra`
+--
+ALTER TABLE `compra`
+  ADD CONSTRAINT `FK_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `users` (`id`);
+
+--
+-- Filtros para la tabla `compras_productos`
+--
+ALTER TABLE `compras_productos`
+  ADD CONSTRAINT `FK_id_compras` FOREIGN KEY (`id_compras`) REFERENCES `compra` (`id`),
+  ADD CONSTRAINT `FK_id_producto` FOREIGN KEY (`id_productos`) REFERENCES `products` (`id`);
 
 --
 -- Filtros para la tabla `products`

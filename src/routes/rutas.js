@@ -57,4 +57,14 @@ router.put('/checkout', (req, res, next)=> {
 
 
 
+router.get('/historyshop/:id', (req, res, next) => {
+    ProductsController.historyshop(req, res, next);
+});
+
+router.get('/historyshop/', (req, res, next) => {
+    ProductsController.historyshopAdmin(req, res, next);
+});
+
+
+
 module.exports = router;

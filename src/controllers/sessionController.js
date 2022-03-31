@@ -3,7 +3,7 @@ const controller = {};
 controller.login = (req, res, next) => {
     console.log('--login--');
     req.getConnection((err, conn) => {
-        conn.query(`SELECT name, email,role FROM users
+        conn.query(`SELECT id, name, email,role FROM users
         WHERE email = '${req.body.name}' AND password = '${req.body.password}';`, (err, response) => {
             if (err) {
                 res.json({
